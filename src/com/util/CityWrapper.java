@@ -18,6 +18,16 @@ public class CityWrapper {
 		distance=0;
 	}
 	
+	public void addEntry (String city1, String city2, String distance) {
+		this.setCity1(city1);
+		this.setCity2(city2);
+		this.setDistance(Integer.parseInt(distance.trim()));
+	}
+	
+	public void displayEntry () {
+		System.out.println("City1: " + city1 + "; City2: " + city2 + "; Distance: " + distance);
+	}
+	
 	/**
 	 * @return the city1
 	 */
