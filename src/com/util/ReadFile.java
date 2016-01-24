@@ -29,6 +29,7 @@ public class ReadFile {
 			cityWrapperObj.displayEntry();
 			cityList.add(cityWrapperObj);
 		}
+		br.close();
 		System.out.println("Size of cityList: " + cityList.size());
 	}
 

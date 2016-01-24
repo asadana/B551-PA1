@@ -33,13 +33,13 @@ public class Main {
 				break;
 			}
 			else {
-				System.out.println("\nERROR: File doesn't exist.\nPlease try again.\n");	
+				System.out.println("\nERROR: File doesn't exist.\nPlease try again.\n");
 			}
 		} 
 		
 		ReadFile readFileObj = new ReadFile(fileName);
 		readFileObj.readIt();
 		
-
+		br.close();
 	}
 }
