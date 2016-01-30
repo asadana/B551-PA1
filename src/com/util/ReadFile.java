@@ -16,7 +16,6 @@ public class ReadFile {
 		this.setFileName(fileName);
 		this.setDelim(" ");
 		cityList = new ArrayList<CityMapper>();
-		//cityList = new ArrayList<CityWrapper>();
 	}
 	
 	public void readIt() throws IOException {
@@ -24,7 +23,6 @@ public class ReadFile {
 		BufferedReader br = new BufferedReader(new InputStreamReader(fileInputObj));
 		String lineRead;
 		boolean foundCity1Bool = false, foundCity2Bool = false;
-		// CityWrapper cityWrapperObj = new CityWrapper();
 		CityMapper cityMapperObj;
 		
 		while ((lineRead = br.readLine()) != null) {
@@ -57,20 +55,12 @@ public class ReadFile {
 					cityList.add(cityMapperObj);
 				}
 			}
-			
-			//System.out.println("Size of CityList: " + cityList.size());
-						
-			/*cityWrapperObj.addEntry(temp[0], temp[1], temp[2]);
-			cityWrapperObj.displayEntry();
-			cityList.add(cityWrapperObj);*/
 		}
 		br.close();
 		
 		for(CityMapper cityObj : cityList) {
 			System.out.println("City: " + cityObj.getCityName() + "\t" + cityObj.getNeighbors());
 		}
-		
-		//System.out.println("Size of cityList: " + cityList.size());
 	}
 
 	/**
