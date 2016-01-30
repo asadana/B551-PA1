@@ -128,19 +128,4 @@ public class ReadFile {
 	public void setDelim(String delim) {
 		this.delim = delim;
 	}
-	/*
-	*//**
-	 * @return the cityList
-	 *//*
-	public ArrayList<CityWrapper> getCityList() {
-		return cityList;
-	}
-
-	*//**
-	 * @param cityList the cityList to set
-	 *//*
-	public void setCityList(ArrayList<CityWrapper> cityList) {
-		this.cityList = cityList;
-	}
-	*/
 }
