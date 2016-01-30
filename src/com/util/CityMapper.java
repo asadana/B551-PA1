@@ -11,25 +11,25 @@ import java.util.HashMap;
  */
 public class CityMapper {
 	private String cityName;
-	private HashMap<String, Integer> neighbhors;
+	private HashMap<String, Integer> neighbors;
 	
-	CityMapper(String cityName, String neighbhorName, int distance) {
+	CityMapper(String cityName, String neighborName, int distance) {
 		this.cityName = cityName;
-		neighbhors = new HashMap<String, Integer>();
-		neighbhors.put(neighbhorName, distance);
+		neighbors = new HashMap<String, Integer>();
+		neighbors.put(neighborName, distance);
 	}
 	
 	/**
-	 * @return the neighbhors
+	 * @return the neighbors
 	 */
-	public HashMap<String, Integer> getNeighbhors() {
-		return neighbhors;
+	public HashMap<String, Integer> getNeighbors() {
+		return neighbors;
 	}
 	/**
-	 * @param neighbhors the neighbhors to add
+	 * @param neighbors the neighbors to add
 	 */
-	public void addNeighbhors(String neighbhorName, int distance) {
-		neighbhors.put(neighbhorName, distance);		
+	public void addNeighbors(String neighborName, int distance) {
+		neighbors.put(neighborName, distance);		
 	}
 	/**
 	 * @return the cityName

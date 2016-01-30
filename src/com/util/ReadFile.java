@@ -40,11 +40,11 @@ public class ReadFile {
 			} else {
 				for (CityMapper cityObj : cityList) {
 					if(temp[0].compareTo(cityObj.getCityName()) == 0) {
-						cityObj.addNeighbhors(temp[1], Integer.parseInt(temp[2]));
+						cityObj.addNeighbors(temp[1], Integer.parseInt(temp[2]));
 						foundCity1Bool = true;
 					}
 					else if(temp[1].compareTo(cityObj.getCityName()) == 0) {
-						cityObj.addNeighbhors(temp[0], Integer.parseInt(temp[2]));
+						cityObj.addNeighbors(temp[0], Integer.parseInt(temp[2]));
 						foundCity2Bool = true;
 					}
 				}
@@ -67,7 +67,7 @@ public class ReadFile {
 		br.close();
 		
 		for(CityMapper cityObj : cityList) {
-			System.out.println(cityObj.getCityName());
+			System.out.println("City: " + cityObj.getCityName() + "\t" + cityObj.getNeighbors());
 		}
 		
 		//System.out.println("Size of cityList: " + cityList.size());
