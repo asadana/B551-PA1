@@ -73,7 +73,7 @@ public class Main {
 			// Splitting the start city before ', '
 			String[] tempString = inputString.split(", ");
 			String startCity = tempString[0];
-			// Splitting goal city and type of city using space as delimeter 
+			// Splitting goal city and type of city using space as delimiter 
 			String[] tempString2 = tempString[1].split(" ");
 			String goalCity = tempString2[0];
 			String typeOfSearch = tempString2[1];
