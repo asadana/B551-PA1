@@ -9,28 +9,68 @@ import java.util.ArrayList;
 public class ReadFile {
 	private String fileName;
 	private String delim;
-	private ArrayList<CityWrapper> cityList;
+	private ArrayList<CityMapper> cityList;
+	//private ArrayList<CityWrapper> cityList;
 	
 	public ReadFile (String fileName) {
 		this.setFileName(fileName);
-		this.setDelim("\t");
-		cityList = new ArrayList<CityWrapper>();
+		this.setDelim(" ");
+		cityList = new ArrayList<CityMapper>();
+		//cityList = new ArrayList<CityWrapper>();
 	}
 	
 	public void readIt() throws IOException {
 		FileInputStream fileInputObj = new FileInputStream(fileName);
 		BufferedReader br = new BufferedReader(new InputStreamReader(fileInputObj));
 		String lineRead;
-		CityWrapper cityWrapperObj = new CityWrapper();
+		boolean foundCity1Bool = false, foundCity2Bool = false;
+		// CityWrapper cityWrapperObj = new CityWrapper();
+		CityMapper cityMapperObj;
 		
 		while ((lineRead = br.readLine()) != null) {
 			String[] temp = lineRead.split(delim);
-			cityWrapperObj.addEntry(temp[0], temp[1], temp[2]);
+			foundCity1Bool = false;
+			foundCity2Bool = false;
+			
+			if(cityList.isEmpty()) {
+				cityMapperObj = new CityMapper(temp[0], temp[1], Integer.parseInt(temp[2]));
+				cityList.add(cityMapperObj);
+				cityMapperObj = new CityMapper(temp[1], temp[0], Integer.parseInt(temp[2]));
+				cityList.add(cityMapperObj);
+			} else {
+				for (CityMapper cityObj : cityList) {
+					if(temp[0].compareTo(cityObj.getCityName()) == 0) {
+						cityObj.addNeighbhors(temp[1], Integer.parseInt(temp[2]));
+						foundCity1Bool = true;
+					}
+					else if(temp[1].compareTo(cityObj.getCityName()) == 0) {
+						cityObj.addNeighbhors(temp[0], Integer.parseInt(temp[2]));
+						foundCity2Bool = true;
+					}
+				}
+				if(!foundCity1Bool) {
+					cityMapperObj = new CityMapper(temp[0], temp[1], Integer.parseInt(temp[2]));
+					cityList.add(cityMapperObj);
+				}
+				if(!foundCity2Bool) {
+					cityMapperObj = new CityMapper(temp[1], temp[0], Integer.parseInt(temp[2]));
+					cityList.add(cityMapperObj);
+				}
+			}
+			
+			//System.out.println("Size of CityList: " + cityList.size());
+						
+			/*cityWrapperObj.addEntry(temp[0], temp[1], temp[2]);
 			cityWrapperObj.displayEntry();
-			cityList.add(cityWrapperObj);
+			cityList.add(cityWrapperObj);*/
 		}
 		br.close();
-		System.out.println("Size of cityList: " + cityList.size());
+		
+		for(CityMapper cityObj : cityList) {
+			System.out.println(cityObj.getCityName());
+		}
+		
+		//System.out.println("Size of cityList: " + cityList.size());
 	}
 
 	/**
@@ -60,18 +100,19 @@ public class ReadFile {
 	public void setDelim(String delim) {
 		this.delim = delim;
 	}
-	/**
+	/*
+	*//**
 	 * @return the cityList
-	 */
+	 *//*
 	public ArrayList<CityWrapper> getCityList() {
 		return cityList;
 	}
 
-	/**
+	*//**
 	 * @param cityList the cityList to set
-	 */
+	 *//*
 	public void setCityList(ArrayList<CityWrapper> cityList) {
 		this.cityList = cityList;
 	}
-	
+	*/
 }
