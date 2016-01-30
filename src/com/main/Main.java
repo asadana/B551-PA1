@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 import com.util.CityMapper;
 import com.util.ReadFile;
+import com.util.Search;
 
 /**
  * @author asadana, jaynagle
@@ -67,7 +68,7 @@ public class Main {
 		// While loop accepts user search queries
 		while(true) {
 
-			System.out.println("\nEnter input in the form of \"City1, City2 BFS\": ");
+			System.out.println("\nEnter input in the form of \"City1, City2 BFS/DFS/IDS\": ");
 			inputString = br.readLine();
 			
 			// Splitting the start city before ', '
@@ -78,7 +79,14 @@ public class Main {
 			String goalCity = tempString2[0];
 			String typeOfSearch = tempString2[1];
 			
-			System.out.println("\n\nGoing from " + startCity + " to " + goalCity + " using " + typeOfSearch + "\n\n");
+			// System.out.println("\n\nGoing from " + startCity + " to " + goalCity + " using " + typeOfSearch + "\n\n");
+			if(typeOfSearch.compareToIgnoreCase("bfs") == 0 || typeOfSearch.compareToIgnoreCase("dfs") == 0 || typeOfSearch.compareToIgnoreCase("ids") == 0) {
+				Search searchObj = new Search(startCity, goalCity, typeOfSearch, cityList);
+			}
+			else {
+				System.out.println("Invalid type of search entered.");
+			}
+			
 			
 			System.out.println("Want to do another search? [Y/N]: ");
 			inputString = br.readLine();
