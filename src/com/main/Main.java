@@ -10,6 +10,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+
+import com.util.CityMapper;
 import com.util.ReadFile;
 
 /**
@@ -17,6 +20,8 @@ import com.util.ReadFile;
  *
  */
 public class Main {
+	// CityMapper ArrayList to store all the cities and their neighbors
+	private static ArrayList<CityMapper> cityList;
 
 	public static void main(String[] args) throws IOException {
 		// BufferedReader to read and store user input
@@ -28,13 +33,16 @@ public class Main {
 		// delim stores the delimiter used to parse the txt file
 		String delim = " ";
 		
+		// Input string for search
+		String inputString;
+		
 		// while loop checks if the file exists or asks user to enter another file
 		while (true) {
 			fileDist = new File (fileName);
 			
 			// If file exists
 			if (fileDist.exists()) {
-				System.out.println("\nFile Found!\n");
+				//System.out.println("\nFile Found!\n");
 				break;
 			}
 			// If file not found
@@ -49,7 +57,41 @@ public class Main {
 		
 		// ReadFile reads the file given
 		ReadFile readFileObj = new ReadFile(fileName, delim);
-		readFileObj.readIt();
+		cityList = readFileObj.readIt();
+		
+		// Display all cities in cityList and it's neighbors
+		for (CityMapper cityObj : cityList) {
+			System.out.println("City: " + cityObj.getCityName() + "\t" + cityObj.getNeighbors());
+		}
+		
+		// While loop accepts user search queries
+		while(true) {
+
+			System.out.println("\nEnter input in the form of \"City1, City2 BFS\": ");
+			inputString = br.readLine();
+			
+			// Splitting the start city before ', '
+			String[] tempString = inputString.split(", ");
+			String startCity = tempString[0];
+			// Splitting goal city and type of city using space as delimeter 
+			String[] tempString2 = tempString[1].split(" ");
+			String goalCity = tempString2[0];
+			String typeOfSearch = tempString2[1];
+			
+			System.out.println("\n\nGoing from " + startCity + " to " + goalCity + " using " + typeOfSearch + "\n\n");
+			
+			System.out.println("Want to do another search? [Y/N]: ");
+			inputString = br.readLine();
+			if (inputString.compareToIgnoreCase("N") == 0) {
+				break;
+			}
+			else if (inputString.compareToIgnoreCase("Y") == 0) {
+				continue;
+			}
+			else {
+				System.out.println("Invalid response.\nExiting...\n");
+			}
+		}
 		
 		br.close();
 	}

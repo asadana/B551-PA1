@@ -34,7 +34,7 @@ public class ReadFile {
 	}
 	
 	// readIt is a functions which reads and parses the fileName file.
-	public void readIt() throws IOException {
+	public ArrayList<CityMapper> readIt() throws IOException {
 		// Objects to read the file
 		FileInputStream fileInputObj = new FileInputStream(fileName);
 		BufferedReader br = new BufferedReader(new InputStreamReader(fileInputObj));
@@ -95,10 +95,7 @@ public class ReadFile {
 		}
 		br.close();
 		
-		// Display all cities in cityList and it's neighbors
-		for(CityMapper cityObj : cityList) {
-			System.out.println("City: " + cityObj.getCityName() + "\t" + cityObj.getNeighbors());
-		}
+		return cityList;
 	}
 
 	/**
