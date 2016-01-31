@@ -29,9 +29,12 @@ public class Search {
 	private Map<String, Map<String, Integer>> cityMap;
 	// private String[] visitedCities;
 	// List to keep track of explored cities
-	List<String> visitedCities = new ArrayList<>();
+	private List<String> visitedCities = new ArrayList<>();
 	private boolean reached;
 	private int totalDistance;
+
+	// Used to store final path from source to destination
+	private List<Map<String, Integer>> finalPath = new LinkedList<>();
 
 	public Search(String startCity, String goalCity, String typeOfSearch, ArrayList<CityMapper> cityList,
 			Map<String, Map<String, Integer>> cityMap) {
@@ -47,14 +50,19 @@ public class Search {
 		if (cityMap.get(startCity) == null || cityMap.get(goalCity) == null) {
 			System.out.println("Invalid input given.\n");
 		} else {
-			if (BFS.equalsIgnoreCase(typeOfSearch))
+			if (BFS.equalsIgnoreCase(this.typeOfSearch))
 				bfs();
-			else if (DFS.equalsIgnoreCase(typeOfSearch))
-				dfs();
-			else if (ID.equalsIgnoreCase(typeOfSearch))
+			else if (DFS.equalsIgnoreCase(this.typeOfSearch))
+				dfs(startCity);
+			else if (ID.equalsIgnoreCase(this.typeOfSearch))
 				ids();
 			else
 				System.out.println("Invalid type of search entered.");
+
+			if (finalPath.size() > 0)
+				displayFinalOutput();
+			else
+				System.out.println("Could not find path to the destination");
 		}
 	}
 
@@ -81,9 +89,6 @@ public class Search {
 
 		// Temporary map used to create above PATHLIST.
 		Map<String, Integer> tmpListMap = null;
-
-		// Used to store final path from source to destination
-		List<Map<String, Integer>> finalPath = new LinkedList<>();
 
 		while (tmpPathMap != null) {
 			if (tmpPathMap.size() > 0) {
@@ -146,7 +151,6 @@ public class Search {
 			} else {
 				// This block will be executed to explore neighbors of start
 				// node/city.
-				visitedCities.add(startCity);
 				for (Entry<String, Integer> entry : cityMap.get(startCity).entrySet()) {
 					pathList = new LinkedList<>();
 					tmpListMap = new HashMap<>();
@@ -174,48 +178,70 @@ public class Search {
 				}
 			}
 		}
-
-		// Code to format result in the desired format and calculate total
-		// distance to the destination.
-		if (!finalPath.isEmpty()) {
-			int totalCost = 0;
-			StringBuffer bf = new StringBuffer();
-			bf.append(startCity + ", ");
-			for (Map<String, Integer> finalPathMap : finalPath) {
-				Map.Entry<String, Integer> entry = finalPathMap.entrySet().iterator().next();
-				bf.append(entry.getKey() + ", ");
-				totalCost += entry.getValue();
-			}
-
-			// Print output
-			System.out.println(bf.toString().substring(0, bf.length() - 2) + " - " + totalCost);
-		} else {
-			System.out.println("Could not find path to the destination");
-		}
 	}
 
 	/**
 	 * This method will find the route to destination using Depth First Search.
 	 * 
-	 * @param startCity
-	 * @param goalCity
+	 * @param currentNode
 	 */
-	private void dfs() {
+	private void dfs(String currentNode) {
+		visitedCities.add(currentNode);
 
+		Map<String, Integer> adjecentCities = cityMap.get(currentNode);
+		for (Entry<String, Integer> entry : adjecentCities.entrySet()) {
+			if (!reached) {
+				if (!visitedCities.contains(entry.getKey())) {
+					Map<String, Integer> tmpPath = new HashMap<>();
+					tmpPath.put(entry.getKey(), entry.getValue());
+					finalPath.add(tmpPath);
+					if (goalCity.equals(entry.getKey())) {
+						// If destination is found to be the current node, end
+						// the search
+						reached = true;
+						break;
+					}
+					if (!reached)
+						// Explore child nodes for current city.
+						dfs(entry.getKey());
+				}
+			} else {
+				break;
+			}
+		}
+		if (!reached)
+			// Remove last explored node which has no new children.
+			finalPath.remove(finalPath.size() - 1);
 	}
 
 	/**
 	 * This method will find the route to destination using Iterative Deepening
 	 * Search.
 	 * 
-	 * @param startCity
-	 * @param goalCity
-	 */
+	 **/
 	private void ids() {
 
 	}
 
 	private void displayVisited() {
 		// TODO Auto-generated method stub
+	}
+
+	/**
+	 * This method prints the result in the desired format and calculates total
+	 * distance to the destination
+	 */
+	private void displayFinalOutput() {
+		totalDistance = 0;
+		StringBuffer bf = new StringBuffer();
+		bf.append(startCity + ", ");
+		for (Map<String, Integer> finalPathMap : finalPath) {
+			Map.Entry<String, Integer> entry = finalPathMap.entrySet().iterator().next();
+			bf.append(entry.getKey() + ", ");
+			totalDistance += entry.getValue();
+		}
+
+		// Print output
+		System.out.println(bf.toString().substring(0, bf.length() - 2) + " - " + totalDistance);
 	}
 }
