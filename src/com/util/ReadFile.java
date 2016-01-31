@@ -12,6 +12,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author asadana, jaynagle
@@ -97,6 +99,42 @@ public class ReadFile {
 		
 		return cityList;
 	}
+	
+	// readIt is a functions which reads and parses the fileName file.
+		public Map<String, Map<String, Integer>> readAsMap() throws IOException {
+			// Objects to read the file
+			FileInputStream fileInputObj = new FileInputStream(fileName);
+			BufferedReader br = new BufferedReader(new InputStreamReader(fileInputObj));
+			String lineRead;
+			
+		    // Map to hold cities
+			Map<String, Map<String, Integer>> cityMap = new HashMap<>();
+			
+			// while loop reads the one line at a time till end of file
+			while ((lineRead = br.readLine()) != null) {
+				// split the read line with delim
+				String[] temp = lineRead.split(delim);
+				
+				if(cityMap.get(temp[0]) != null) {
+					cityMap.get(temp[0]).put(temp[1], Integer.parseInt(temp[2]));					
+				}else{
+					Map<String, Integer> tmpMap = new HashMap<>();
+					tmpMap.put(temp[1], Integer.parseInt(temp[2]));
+					cityMap.put(temp[0], tmpMap);
+				}
+				
+				if(cityMap.get(temp[1]) != null) {
+					cityMap.get(temp[1]).put(temp[0], Integer.parseInt(temp[2]));					
+				}else{
+					Map<String, Integer> tmpMap = new HashMap<>();
+					tmpMap.put(temp[0], Integer.parseInt(temp[2]));
+					cityMap.put(temp[1], tmpMap);
+				}
+			}
+			br.close();
+			
+			return cityMap;
+		}
 
 	/**
 	 * @return the fileName
