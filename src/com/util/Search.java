@@ -50,9 +50,9 @@ public class Search {
 			if (BFS.equalsIgnoreCase(typeOfSearch))
 				bfs();
 			else if (DFS.equalsIgnoreCase(typeOfSearch))
-				dfs(startCity, goalCity);
+				dfs();
 			else if (ID.equalsIgnoreCase(typeOfSearch))
-				ids(startCity, goalCity);
+				ids();
 			else
 				System.out.println("Invalid type of search entered.");
 		}
