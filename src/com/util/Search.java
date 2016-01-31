@@ -200,7 +200,7 @@ public class Search {
 	 * @param startCity
 	 * @param goalCity
 	 */
-	private void dfs(String startCity, String goalCity) {
+	private void dfs() {
 
 	}
 
@@ -211,7 +211,7 @@ public class Search {
 	 * @param startCity
 	 * @param goalCity
 	 */
-	private void ids(String startCity, String goalCity) {
+	private void ids() {
 
 	}
 
