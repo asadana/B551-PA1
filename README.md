@@ -17,6 +17,7 @@ Programming Assignment #1 for B551 - Elements of AI
 *src.com.util.Search.java* contains the following variable which allows the initial search depth of IDS to be set.
 >// ID_DEPTH variable stores the depth which is initially provided to the Iterative Deepening Search.
 >// This is also used as increment steps in depth
+>// ID_DEPTH = 2 represents 0,1,2 , i.e, 3 depth
 >
 >`ID_DEPTH = 2;`
 
