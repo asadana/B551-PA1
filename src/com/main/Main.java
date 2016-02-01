@@ -10,11 +10,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.util.CityMapper;
 import com.util.ReadFile;
 import com.util.Search;
 
@@ -23,9 +21,6 @@ import com.util.Search;
  *
  */
 public class Main {
-	// CityMapper ArrayList to store all the cities and their neighbors
-	private static ArrayList<CityMapper> cityList;
-
 	// Static configuration map containing information about all the cities and
 	// their distances.
 	private static Map<String, Map<String, Integer>> cityMap;
@@ -66,7 +61,6 @@ public class Main {
 
 		// ReadFile reads the file given
 		ReadFile readFileObj = new ReadFile(fileName, delim);
-		cityList = readFileObj.readIt();
 		cityMap = readFileObj.readAsMap();
 
 		// Display all cities in cityList and it's neighbors
@@ -96,7 +90,7 @@ public class Main {
 
 			// System.out.println("\n\nGoing from " + startCity + " to " +
 			// goalCity + " using " + typeOfSearch + "\n\n");
-			new Search(startCity, goalCity, typeOfSearch, cityList, cityMap);
+			new Search(startCity, goalCity, typeOfSearch, cityMap);
 
 			System.out.println("Want to do another search? [Y/N]: ");
 			inputString = br.readLine();
