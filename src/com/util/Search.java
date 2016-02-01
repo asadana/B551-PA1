@@ -20,7 +20,7 @@ import java.util.Map.Entry;
 public class Search {
 	private static final String BFS = "BFS";
 	private static final String DFS = "DFS";
-	private static final String ID = "ID";
+	private static final String IDS = "IDS";
 
 	private static final int ID_DEPTH = 2;
 
@@ -58,7 +58,7 @@ public class Search {
 				bfs();
 			else if (DFS.equalsIgnoreCase(this.typeOfSearch))
 				dfs(startCity);
-			else if (ID.equalsIgnoreCase(this.typeOfSearch))
+			else if (IDS.equalsIgnoreCase(this.typeOfSearch))
 				ids(startCity);
 			else
 				System.out.println("Invalid type of search entered.");
