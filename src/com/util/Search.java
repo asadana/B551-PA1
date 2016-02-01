@@ -22,7 +22,7 @@ public class Search {
 	private static final String DFS = "DFS";
 	private static final String IDS = "IDS";
 
-	private static final int ID_DEPTH = 2;
+	private static final int ID_DEPTH = 3;
 
 	private String startCity, goalCity, typeOfSearch;
 	// Static configuration map containing information about all the cities and
@@ -264,6 +264,7 @@ public class Search {
 			for (Entry<String, Integer> entry : adjecentCities.entrySet()) {
 				if (!reached) {
 					if (!visitedCities.contains(entry.getKey())) {
+
 						Map<String, Integer> tmpPath = new HashMap<>();
 						tmpPath.put(entry.getKey(), entry.getValue());
 						tmpPathIds.add(tmpPath);
@@ -313,7 +314,6 @@ public class Search {
 	 */
 	private void populateTmpPathForIDS(String currentNode) {
 		LinkedList<Map<String, Integer>> tmpTransferList = new LinkedList<>();
-
 		if (tmpPathIdsMap.get(currentNode) == null) {
 			tmpTransferList.addAll(tmpPathIds);
 			tmpPathIdsMap.put(currentNode, tmpTransferList);
