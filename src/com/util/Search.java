@@ -237,7 +237,7 @@ public class Search {
 			} else {
 				tmpTransferPathIdsMap = new HashMap();
 				tmpTransferPathIdsMap.putAll(tmpPathIdsMap);
-				System.out.println("Not found upto depth : " + ID_DEPTH + ", Increasing search depth by " + ID_DEPTH);
+				System.out.println("Not found upto depth : " + (ID_DEPTH + 1) + ", Increasing search depth by " + (ID_DEPTH + 1));
 				for (String city : tmpTransferPathIdsMap.keySet()) {
 					if (!reached) {
 						depthLimitedSearch(city, 0, city);
@@ -258,7 +258,7 @@ public class Search {
 	 * @param parent
 	 */
 	private void depthLimitedSearch(String currentNode, int depthCount, String parent) {
-		if (ID_DEPTH > depthCount) {
+		if (ID_DEPTH >= depthCount) {
 			visitedCities.add(currentNode);
 			Map<String, Integer> adjecentCities = cityMap.get(currentNode);
 			for (Entry<String, Integer> entry : adjecentCities.entrySet()) {
