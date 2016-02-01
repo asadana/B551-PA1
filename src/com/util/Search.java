@@ -228,11 +228,17 @@ public class Search {
 	private void ids(String currentNode) {
 		visitedCities.add(currentNode);
 		int depthCount = 0;
+		Map<String, LinkedList<Map<String, Integer>>> tmpTransferPathIdsMap;
+
 		while (!reached) {
+
 			if (tmpPathIdsMap.size() == 0) {
 				depthLimitedSearch(currentNode, depthCount, currentNode);
 			} else {
-				for (String city : tmpPathIdsMap.keySet()) {
+				tmpTransferPathIdsMap = new HashMap();
+				tmpTransferPathIdsMap.putAll(tmpPathIdsMap);
+
+				for (String city : tmpTransferPathIdsMap.keySet()) {
 					if (!reached) {
 						depthLimitedSearch(city, 0, city);
 					} else {
