@@ -2,6 +2,8 @@
 Programming Assignment #1 for B551 - Elements of AI
 ------------------------
 
+GITHUB URL: https://github.com/asadana/B551-PA1
+
 **Important Variables**
 
 *src.com.main.Main.java* contains the following variables which allows the file to be read in the right way.
