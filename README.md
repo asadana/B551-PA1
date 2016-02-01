@@ -6,9 +6,11 @@ Programming Assignment #1 for B551 - Elements of AI
 *src.com.Main.java* contains the following variables which allows the file to be read in the right way.
 >// fileName variable contains the list of cities in the form of "City1 City2 Distance"
 >// The default location of this file is assumed in the project folder "B551-PA1/romania-distance.txt"
+>
 >`fileName = "romania-distance.txt";` 
-> 
+
 > // delim stores the delimiter used to parse the txt file in fileName [Default: Space]
+>
 > `delim = " ";`
 
 **How to Run**
